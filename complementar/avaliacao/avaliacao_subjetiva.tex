@@ -5,7 +5,7 @@
 \usepackage[T1]{fontenc} % Caracteres com acentos são considerados como um bloco
 \usepackage{ae} % Arruma a fonte quando usa o pacote acima
 \usepackage{amssymb} % Caracteres matemáticos especiais
-\usepackage[pdftex]{graphicx} % Para inserir figuras    
+\usepackage[pdftex]{graphicx} % Para inserir figuras
 \usepackage{titlesec}
 \usepackage[section]{placeins}
 \usepackage{listings}
@@ -21,7 +21,7 @@
 
 \title{
 	\textbf{
-        MAC0431 - Relatório do EP1
+        MAC0499 - Avaliação Subjetiva
     }
 }
 
@@ -30,120 +30,60 @@
 	thalespaiva@gmail.com       \\
 }
 
-\date{5/12/2014}
+\date{1/12/2014}
 \begin{document}
 \maketitle
 \tableofcontents
 \pagebreak
 
-\section{Estrutura do código}
 
-Tentei modularizar o código o máximo possível. Assim, espero deixar o paralelismo evidente nas seções paralelas. Infelizmente, esta abordagem pode fazer (e fez) meu programa perder performance.
-
-\subsection{hexboard.c}
-
-Tratei o tabuleiro usado pelas joaninhas como um tipo abstrato de dados. Assim, qualquer chamada ao tabuleiro deverá seguir a interface:
-
-\begin{verbatim}
-int      hexboard_init(int nrows, int ncols);
-int      hexboard_cell_is_free(int i, int j);
-void     hexboard_declare_intention_to_occupy(int i, int j, double delta_temp);
-void     hexboard_cell_set_temp(int i, int j, double temperature);
-double   hexboard_cell_get_temp(int i, int j);
-double   hexboard_get_distance_squared(int i1, int j1, int i2, int j2);
-void     hexboard_occupy_cell(int i, int j);
-void     hexboard_free_cell(int i, int j);
-void     hexboard_cell_update(int i, int j);
-double   hexboard_cell_get_cand_delta_temp(int i, int j);
-int      hexboard_cell_get_n_moving_candidates(int i, int j);
-int      hexboard_cell_is_null(CellInfo *cell_info);
-int      hexboard_cell_rand_r(int i, int j);
-void     hexboard_generate_cells_seeds(int *pnt_global_seed);
-void     hexboard_cell_put_hf(int i, int j);
-void     hexboard_cell_free_hf(int i, int j);
-int      hexboard_cell_has_hf(int i, int j);
-CellInfo hexboard_get_free_max_temp_neighbour(int i, int j);
-CellInfo hexboard_get_free_min_temp_neighbour(int i, int j);
-\end{verbatim}
-
-Este módulo não usa a OpenMP em nenhum momento, pois, como as funções de maior consumo só são utilizadas no começo, o código ficaria mais lento.
-
-\subsection{bug.c}
-
-Este módulo contém a implementação da vida de uma joaninha. Ela pode ser inicializada, declarar a intenção de mover para um hexágono vizinho e mover-se para um hexágono vizinho. Assim, as funções deste módulo são:
-
-\begin{verbatim}
-Bug * bug_init(double C, double temp_min, double temp_max);
-void  bug_declare_intention_to_move(Bug *bug);
-void  bug_move(Bug *bug);
-\end{verbatim}
-
-\subsection{heatfont.c}
-
-Este módulo contém a implementação das fontes de calor aleatórias. Além de conter funções específicas para uma fonte, contém funções para tratar dos vetores de fonte. Sua interface é:
-
-\begin{verbatim}
-HeatFont * heatfont_init(int i, int j, int cycles_to_live, double C);
-void       heatfont_add_to_list(HFnode **plist, HeatFont *hf);
-int        heatfont_list_update(HFnode **node, HeatFont *heatfonts);
-void       heatfont_show(HeatFont *hf);
-int        heatfont_add_to_array(HeatFont **heatfonts, HeatFont *hf, int n);
-int        heatfont_array_update(HeatFont **heatfonts, int n);
-\end{verbatim}
-
-\subsection{engine.c}
-
-Este é o módulo principal e contém o motor da simulação. Além de uma simples interface para que a função principal possa iniciar uma simulação:
-
-\begin{verbatim}
-void engine_setup(SetupInfo *info);
-void engine_run();
-\end{verbatim}
-
-este módulo implementa uma série de funções auxiliares que podem ser paralelizadas. Para mais informações sobre isso, veja a seção sobre paralelização.
-
-\subsection{hotbugs.c}
-
-Contém a função principal.
-
-\pagebreak
-\section{Estratégia de paralelização}
-
-Para a paralelização, utilizei o OpenMP. Como ele dá uma interface simples para paralelizar programas sequenciais, primeiro desenvolvi uma versão sequencial e depois paralelizei-a aos poucos. Essa abordagem pode não ser a melhor, pois meu código foi pensado sequencialmente. Porém, pude manter um controle de corretude mínima através da comparação entre os resultados do programa sequencial e dos cada vez mais paralelos.
-
-Em geral, usei a paralelização em funções que usam laços (neste caso, as que mais consomem tempo). Pode-se ver certa paralelização nas funções:
-\begin{verbatim}
-
-double calculate_cell_temperature_because_of_bugs(int i, int j);
-double calculate_cell_temperature_because_of_heatfonts(int i, int j);
-void update_cell_temperature(int i, int j);
-void gen_random_heat_fonts();
-void update_board();
-void move_all_bugs();
-
-\end{verbatim}
-
-
-\section{Exemplos de entrada e saída}
+\section{Escolha do tema}
 \mbox{}
 
-Para examinar o comportamento das joaninhas, escrevi um simples (e um tanto precário) script em Python3 para desenhar uma figura representando uma iteração da simulação. Para usá-lo, deve-se fazer:
-\begin{verbatim}
-./graphs/hexdraw.py ./dumps/dumpcycleXXXX.dat
-\end{verbatim}
+Minha ideia inicial era escolher um tema fora do que já conhecesse e de preferência novo. Assim, poderia ter menos trabalho técnico e mais leituras e estudos exploratórios. Lembrei de um dos trabalhos pedidos pelo Professor Alfredo na disciplina de Organização de Computadores de 2013 em que, pela primeira vez, se falava de consumo energético implicado por aplicações. Assim, tínhamos um tema muito recente e bem difícil de ser estudado e minha carga de leitura acabou ficando imensa no primeiro semestre.
 
-Neste caso, o diretório dumps/ contém arquivos no formato esperado pelo hexdraw.py. Para este diretório ser preenchido com dumps de cada iteração, basta compilar o programa com a flag {\tt DUMP\_FLAG} valendo 1. Esta flag está no arquivo engine.c, e pode-se alterá-la com:
-\begin{verbatim}
-#define DUMP_FLAG 1
-\end{verbatim}
+Infelizmente\footnote{Para mim, é claro.}, grande parte dos artigos que tratam de eficiência energética na camada de aplicação estudam dispositivos móveis ou embarcados, não PC's e servidores. Assim, como minha proposta original era baseada em artigos que havia lido antes de ter acesso à máquina de testes, muitas das técnicas não valeriam para nosso PC na UFSCar. Por isso, acabei tendo que alterar a proposta original.
 
-\subsection{Teste 1}
+Por sorte, foi muito mais divertido de trabalhar sobre o novo tema, que é bem menos mecânico que o primeiro e tem valor para diversas áreas.
 
 
-
-
-\section{Aceleração obtida}
+\section{Disciplinas mais relevantes para o projeto}
 \mbox{}
+
+\subsection{Organização de Computadores}
+
+Como já falamos, foi nesta disciplina em que conheci o problema de eficiência energética na camada de aplicação. Além disso, foi crucial para interpretar os resultados dos experimentos e para conseguir ler os artigos sobre o tema sem grandes dificuldades.
+
+\subsection{Sistemas Operacionais}
+
+Para o design dos experimentos e interpretação dos resultados esta matéria também me ajudou bastante. Infelizmente, o sistema de testes não era nosso e, assim, não pudemos programar para o kernel do sistema.
+
+\subsection{Introdução à Computação}
+
+Programei um pouco em C, e é nesta disciplina que temos o primeiro contato sério com a linguagem. Não poderia deixar de estar aqui.
+
+
+\subsection{Estruturas de Dados e Análise de Algoritmos}
+
+Nestas matérias, vemos como a escolha das estruturas de dados e dos algoritmos impactam na performance e no consumo de memória. Foram cruciais para a interpretação dos resultados, para o design dos experimentos, para ler os artigos (e para a vida em geral).
+
+\subsection{Laboratório de Programação Extrema}
+
+É nesta disciplina em que, pela primeira vez na graduação, temos que desenvolver um sistema que será realmente utilizado por outras pessoas. Assim, o mesmo espírito que tive nesta disciplina foi o adotado para este trabalho.
+
+\subsection{Programação Concorrente}
+
+Importantíssima para desenhar experimentos, analisar os resultados e ler os artigos. Ainda, há muitas oportunidades para eficiência energética através da programação concorrente.
+
+\subsection{Introdução à Probabilidade e Processos Estocásticos}
+
+Muitos dos modelos para economizar energia com o Hardware e Sistema Operacional são baseados em teoria de processos estocásticos e algoritmos online. Essa disciplina me ajudou bastante a entender os algoritmos e modelos.
+
+\section{Sobre o Resultado do trabalho}
+\mbox{}
+
+Fiquei bem satisfeito com os resultados. Consegui estudar um tema novo para mim, e encontrar oportunidades interessantes. Porém, gostaria de ter sido mais rigoroso, ao menos em alguns experimentos. Não acho que será difícil fazer a análise estatística dos dados e alguns dos comentários que tivemos de fazer timidamente (pois não havia validação estatística) poderiam virar afirmações mais embasadas.
+
 
 
 \end{document}
