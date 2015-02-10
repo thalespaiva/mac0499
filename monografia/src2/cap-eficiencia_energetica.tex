@@ -1,0 +1,194 @@
+\chapter{Eficiência Energética}
+
+Neste capítulo, apresentamos uma revisão das principais iniciativas para economizar energia nas camadas de \emph{hardware}, sistema operacional e aplicação. Após a leitura deste material introdutório, esperamos que o leitor possa entender melhor nosso trabalho e o que ele representa na pesquisa em eficiência energética.
+
+\section{Hardware e Firmware}
+
+Os dispositivos eletrônicos são os responsáveis diretos pela dissipação de energia. Assim, os primeiros estudos em eficiência energética foram direcionados a eles. Este capítulo mapeia as principais inovações técnicas que permitem que os dispositivos usem energia mais eficientemente. Naturalmente, todas elas precisam de apoio do BIOS.
+
+Como estamos sob o ponto de vista da ciência da computação, não tratamos da evolução da implementação física específica dos componentes, apenas mostramos as interfaces, especificações ou padrões utilizados pelos fabricantes de \emph{hardware}.
+
+Seguiremos a taxonomia proposta por Beloglazov et al. em \cite{beloglazov2011taxonomy}. Para uma revisão dos algoritmos associados a cada uma das inovações que descreveremos, o leitor pode consultar o trabalho de Albers \cite{albers2010energy}.
+
+\subsection{Desativação Dinâmica de Componentes}
+
+Como o próprio nome diz, a ideia para economizar energia é desligar componentes de hardware que não estão sendo utilizados. No estudo de eficiência energética, este é o modelo mais simples imaginável: um sistema com dois estados.
+
+A solução do problema da desativação dinâmica seria trivial se não houvesse restrições ao modelo: deligue se estiver inativo, ligue se for requisitado. Porém, devemos considerar que:
+\begin{itemize}
+    \item Há um custo razoável de energia associado à alimentação e estabilização de potência, ao fazer a transição do estado desligado para o ligado.
+
+    \item Não se sabe, a priori, qual será a demanda do sistema no futuro
+\end{itemize}
+
+Assim, apesar de ser uma ideia extremamente simples, resolver este problema pode ser bem complicado. Para isso, utilizam-se técnicas preditivas com algoritmos \emph{online} e teoria de processos estocásticos.
+
+\subsection{\emph{Advanced Power Management}}
+
+Apesar de os algoritmos para resolver o problema da desativação dinâmica chegarem a uma boa competitividade\footnote{Como em teoria de algoritmos \emph{online}.}, a eficiência energética é limitada pela granularidade dos estados. Como há apenas dois estados, o intervalo de tempo necessário para que seja tomada a decisão de desativar o sistema pode ser muito grande.
+
+A solução trivial para este problema é aumentar o número de estados. E esta é justamente a proposta da norma \emph{Advanced Power Management} (APM) elaborada pelas empresas Intel e Microsoft em 1992 e atualizada em 1996. A APM especifica estados para dispositivos e estados para o sistema.
+
+Segundo a versão 1.2 da norma APM \cite{APMnorm:Online}, os estados especificados para dispositivos são mostrados na Tabela \ref{tab:apm_device_states}. Os estados do sistema são mostrados na Tabela \ref{table:apm_system_states}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Estados} & \textbf{Características} \\ \hline
+\textit{Device On} & Dispositivo ligado e totalmente funcional. \\ \hline
+\textit{Device Power Managed} & Dispositivo ligado mas com funcionalidade reduzida. \\ \hline
+\textit{Device Low Power} & \begin{tabular}[c]{@{}l@{}}Dispositivo inoperante e em baixo consumo,\\ Pronto para ser ativado rapidamente..\end{tabular} \\ \hline
+\textit{Device Off} & Dispositivo totalmente desligado. \\ \hline
+\end{tabular}
+\caption{Estados dos dispositivos sob a norma APM v1.2}
+\label{tab:apm_device_states}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Estados} & \textbf{Características}                                                                                                                                                                                           \\ \hline
+\emph{Full On}          & \begin{tabular}[c]{@{}l@{}}Sistema totalmente operante e todos os componentes \\ ligados.\end{tabular}                                                                                                             \\ \hline
+\emph{APM Enabled}      & \begin{tabular}[c]{@{}l@{}}Sistema operando com a APM gerenciando o uso dos \\ dispositivos quando necessário.\end{tabular}                                                                                        \\ \hline
+\emph{APM Standby}      & \begin{tabular}[c]{@{}l@{}}Sistema pode estar inoperante, com os dispositivos \\ operando em estados de baixo consumo energético. \\ Volta rapidamente ao estado acima  por requisição do \\ usuário.\end{tabular} \\ \hline
+\emph{APM Suspend}      & \begin{tabular}[c]{@{}l@{}}Sistema inoperante, com o \emph{clock} da CPU parado. Maioria\\ dos  dispositivos desligados porém com o estado anterior \\ gravado.\end{tabular}                                             \\ \hline
+\emph{Off}              & \begin{tabular}[c]{@{}l@{}}Sistema totalmente inoperante, todos os dispositivos \\ desligados.\end{tabular}                                                                                                        \\ \hline
+\end{tabular}
+\caption{Especificação dos estados do sistema pela APM v1.2}
+\label{table:apm_system_states}
+\end{table}
+
+Os algoritmos utilizados são muito parecidos com os usados para desativação dinâmica de componentes e, muitas vezes, generalizações triviais.
+
+\subsection{Regulagem Dinâmica de Frequência e Voltagem}
+
+Na seção anterior, vimos que os dispositivos em geral podem ter estados de menor consumo energético e com algoritmos inteligentes para a transição entre estados pode-se economizar energia.
+
+Agora, trataremos especificamente do processador, que possui estados de menor consumo energético mas ainda operantes. À possibilidade de configurar a frequência e voltagem de operação do processador, chamamos Regulagem Dinâmica de Frequência e Voltagem\footnote{Também pode-se encontrar variações como Escalonamento Dinâmico de Frequência e Tensão.}. Usaremos a abreviação, do inglês \emph{Dynamic Voltage and Frequency Scaling}, DVFS, para manter a compatibilidade entre as referências.
+
+Quando se faz DVFS, há dois objetivos fundamentais: otimização para performance e otimização para consumo energético. E em geral, o objetivo do usuário é dado por uma combinação linear entre os dois.
+
+O problema de decidir qual o par de frequência e voltagem ótimo não é simples. Alguns dos problemas que uma solução deve tratar são, como Beloglazov et. al referenciam em \cite{beloglazov2011taxonomy}:
+\begin{itemize}
+    \item Nem sempre a performance é melhor para frequências mais altas (ex: \emph{Memory Bound} e \emph{IO Bound}\footnote{Estes termos não possuem tradução fácil e têm significados suficientemente precisos em inglês. Por isso, não foram traduzidos.}).
+    \item A arquitetura dos processadores é muito complexa, tornando difícil modelar a frequência ótima em função do objetivo do usuário.
+    \item A frequência do processador impacta no escalonamento de tarefas. Assim, uma redução em sua frequência de operação pode trazer consequências indesejáveis.
+\end{itemize}
+
+\section{Sistema Operacional}
+
+Na seção passada revisamos soluções implementadas no BIOS e apoiadas pelo \emph{hardware} para economizar energia. Apesar de aumentarem muito a eficiência energética de um sistema, o fato de as soluções serem implementadas em \emph{firmware} implica em vários problemas. Dentre eles, apontamos alguns principais\footnote{Extraídos do website da norma ACPI \cite{ACPI_Overview:Online}, que veremos adiante.} abaixo.
+
+\begin{itemize}
+
+\item O \emph{firmware} possui poucas informações sobre como o usuário está utilizando o sistema. Técnicas que levam em conta os perfis do usuário podem ter desempenho melhor.
+
+\item Cada fabricante define a própria implementação dos gerenciadores.
+
+%Suponha a situação em que dois usuários compartilhem um sistema. Um deles utiliza o computador para fins recreativos de baixo de desempenho enquanto outro o faz para fins científicos de alto desempenho. Se os gerenciadores são implementados em \emph{firmware}, pode ser difícil ou até impossível de os usuários terem controle do modo em que o sistema irá operar.
+
+\item A complexidade dos algoritmos e técnicas para eficiência energética é limitada pelo BIOS.
+
+\item Os esforços gastos no desenvolvimento de técnicas para evitar desperdício de energia são multiplicados pelos desenvolvedores de BIOS.
+
+\item Correções de \emph{bugs} nos gerenciadores podem ser muito caras, pois necessitam uma atualização do BIOS.
+
+\end{itemize}
+
+Esta coleção de problemas sugere que o controle dos dispositivos deve ser passado para uma camada acima. É isso o que propõe a norma ACPI, como veremos na próxima seção.
+
+\subsection{\emph{Advanced Configuration and Power Interface}}
+
+Para resolver os problemas apresentados na introdução, surge em 1996 a especificação \emph{Advanced Configuration and Power Interface} (ACPI) \cite{hewlett2004microsoft}. Este padrão substitui o APM colocando o gerenciamento e monitoramento de energia sob o controle do sistema operacional.
+
+Como a APM, a ACPI também especifica uma série de estados, tanto para os dispositivos, quanto para o sistema, chamados de globais. Porém, o processador recebe tratamento especial, com estados específicos para ele. Além disso, define estados de performance, que indicam dispositivos operantes mas em velocidades ou frequências reduzidas.
+
+Não colocaremos as descrições mais detalhadas dos estado como fizemos para a APM pois ocuparia muito espaço e o resto do texto não depende das especificações da ACPI, mas sim da ideia geral desta norma.
+
+Para conhecer a ACPI mais profundamente, o leitor pode consultar diretamente a especificação em \cite{hewlett2004microsoft}. Para ver como a ACPI é implementada num sistema UNIX, no caso o FreeBSD, pode-se consultar o artigo de Watanabe em \cite{watanabe2002acpi}.
+
+\subsection{Gerenciadores para uso do processador}
+
+Na seção de \emph{hardware}, vimos que através da técnica \emph{DVFS}, pode-se configurar o processador para trabalhar em diferentes frequências. Agora, pela implantação da \emph{ACPI}, o sistema operacional tem a capacidade de fazer \emph{DVFS} observando a demanda do usuário. Para isso, utiliza os chamados gerenciadores ou governadores de frequência.
+
+Como exemplo, a Tabela \ref{tab:governors_modes} mostra os gerenciadores do processador no Linux. As descrições foram extraídas da documentação do \emph{kernel} do Linux, por Brodowski em \cite{DOCgovernors:Online}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Modo do Gerenciador} & \textbf{Características} \\ \hline
+\textit{Performance} & \begin{tabular}[c]{@{}l@{}}Força o processador a usar a frequência de \emph{clock} mais rápida \\ disponível. É estática, independente da demanda. Assim, é o que \\ gasta mais energia.\end{tabular} \\ \hline
+\textit{Powersave} & \begin{tabular}[c]{@{}l@{}}Ao contrário da primeira, esta força o processador a trabalhar\\ na frequência mais baixa disponível. Também é estática e é \\ a que menos gasta energia.\end{tabular} \\ \hline
+\textit{Ondemand} & \begin{tabular}[c]{@{}l@{}}Gerencia dinamicamente a frequência do processador de\\ acordo com a demanda. Quando a carga é alta, usa a maior\\ frequência disponível, e quando aquela é baixa, usa a menor.\\ A performance pode ser afetada se as trocas de frequências\\ do processador forem muito constantes\end{tabular} \\ \hline
+\textit{Userspace} & \begin{tabular}[c]{@{}l@{}}Permite programas rodando com permissões do sistema \\ configurar as frequências.\end{tabular} \\ \hline
+\textit{Conservative} & \begin{tabular}[c]{@{}l@{}}Como o ondemand, mas variando entre frequências menos \\ extremas.\end{tabular} \\ \hline
+\end{tabular}
+\caption{Gerenciadores de uso do processador no Linux}
+\label{tab:governors_modes}
+\end{table}\FloatBarrier
+
+\section{Aplicação}
+
+Conforme as técnicas nas camadas de \emph{hardware} e sistema operacional foram avançando, o consumo implicado pelas aplicações começa a ficar mais aparente. Assim, o estudo de eficiência energética na camada de aplicação é o mais recente. Apresentamos algumas destas técnicas nas próximas seções.
+
+\subsection{Recomendações de alto nível aos usuários}
+
+Estas são recomendações gerais que podem ser feitas a qualquer usuário. Em geral, são encontradas em artigos sobre computação verde que buscam atingir leitores sem que estes de conhecimento técnico avançado. Como exemplo, citaremos algumas recomendações por Murugesan em \cite{murugesan2008harnessing}:
+\begin{itemize}
+    \item usar os gerenciadores de consumo energético;
+    \item desligar o sistema quando não estiver sendo utilizado;
+    \item usar protetores de tela.
+\end{itemize}
+
+Estas recomendações, se seguidas pelos funcionários de uma organização, podem economizar quantidade significativa de energia.
+
+\subsection{Recomendações às gerências de TI}
+
+Como na seção anterior, são recomendações de alto nível. Porém, agora são direcionadas aos gerentes e administradores de setores de tecnologia de informação, portanto, com maior conhecimento técnico. Tanto no já citado trabalho de Mugesan \cite{murugesan2008harnessing} quanto no de Harmon \cite{harmon2009sustainable}, encontramos guias desse tipo. Algumas delas são:
+\begin{itemize}
+    \item melhorar a infraestrutura dos \emph{data centers};
+    \item implantar gestão de carga térmica;
+    \item utilizar virtualização nos servidores;
+    \item utilizar serviços de computação em nuvem.
+\end{itemize}
+
+\subsection{Guias de desenvolvimento}
+
+Na data de escrita deste trabalho, a grande maioria dos trabalhos sobre eficiência energética na camada de aplicação se enquadra nesta categoria. Pela forte correlação entre energia consumida e tempo de execução, há uma série de recomendações para eficiência energética baseadas em técnicas de otimização para performance.
+
+Como exemplo, citaremos algumas recomendações para o desenvolvedores de \emph{software} encontradas em trabalhos publicados pela Intel \cite{VUBestPractices:Online} e pela Universidade de Amsterdã \cite{steigerwald2011developing} :
+
+\begin{itemize}
+    \item fazer \emph{lazy loading} de módulos e bibliotecas;
+    \item usar algoritmos com menor complexidade;
+    \item balancear a carga entre processos;
+    \item evitar o uso de \emph{byte-code};
+    \item reduzir a redundância de dados;
+    \item usar as otimizações do compilador;
+    \item usar bibliotecas de alto desempenho;
+    \item diminuir a complexidade computacional;
+    \item usar as caches eficientemente;
+    \item aplicações adaptáveis.
+\end{itemize}
+
+A grande maioria destas recomendações são encontradas na literatura de otimização para desempenho. Porém, muitas destas recomendações não têm validação empírica para eficiência energética. Ainda, a forma como plataformas diferentes consomem energia é muito variável, como Bunse et al. mostram em \cite{bunse2009exploring}. Assim, cada uma dessas recomendações precisa ser validada para diferentes plataformas.
+
+\subsection{Código dependente de contexto}
+
+Em alguns casos, normalmente quando o software é de aplicação específica, a equipe de desenvolvimento sabe antecipadamente em que ambiente um aplicativo será executado. Quando isso acontece, pode-se otimizar o sistema desenvolvido para aquele ambiente.
+
+O uso de informações como memória RAM disponível, tamanho das caches, \emph{clock} da CPU, tamanho da \emph{pipeline} e quaisquer outras relativas às capacidades e velocidades dos dispositivos para desenvolver software mais eficiente é chamado desenvolvimento dependente de contexto.
+
+Um exemplo claro de como pode-se conseguir desempenhos muito melhores através da contextualização é no desenvolvimento para dispositivos móveis. Bunse et al. observa em \cite{bunse2009exploring} o InsertionSort, ordenando vetores de tamanhos entre 0 e 1000, sendo o algoritmo com melhor desempenho energético, apesar de não ser o com melhor desempenho temporal, em dispositivos móveis.
+
+Um conceito relacionado ao de código dependente de contexto é o de aplicações adaptáveis. Aplicações são ditas adaptáveis quando mudam seu comportamento dinamicamente de acordo com os requisitos do usuário ou propriedades do sistema. Para o sucesso de uma aplicação adaptável, os desenvolvedores devem implementar diferentes comportamentos para os diferences contextos possíveis. Aplicações adaptáveis são sugeridas por Bunse et al. \cite{bunse2009choosing} e Ardito em \cite{ardito2013energy} para aumentar a eficiência energética de software.
+
+%\subsection{Nosso trabalho}
+
+%Iremos tratar apenas de algumas guias de desenvolvimento. Diferentemente
+
+
+

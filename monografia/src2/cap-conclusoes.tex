@@ -1,0 +1,17 @@
+%% ------------------------------------------------------------------------- %%
+\chapter{Conclusões}
+\label{cap:conclusoes}
+
+Fizemos uma rápida introdução à computação verde para justificar o estudo em eficiência energética. 
+
+Revisamos os estudos em eficiência energética no \emph{hardware} e sistema operacional, para mostrar ao leitor a posição que as técnicas na camada de aplicação ocupam.
+
+No experimento sobre perfis de consumos de potência, mostramos que um sistema de medição simples pode ser utilizado para medir o consumo de aplicações. Além disso, pudemos ver como o software realmente é responsável pelo consumo de potência e de energia de um sistema computacional. 
+
+Quando estudamos a escolha de algoritmos no consumo energético, pudemos usar o conhecimento adquirido no primeiro experimento para escolher um algoritmo que consumisse menos potência que os outros clássicos. Vimos que nem sempre o algoritmo mais rápido é o mais recomendado. Assim, reforçamos as conclusões de trabalhos de outros autores de que aplicações adaptáveis são promissoras em eficiência energética na aplicação.
+
+Avaliando o impacto de \emph{code smells} no consumo energético de aplicações, pudemos ver novamente que resultados para sistemas embarcados ou dispositivos móveis não são em geral estendíveis para computadores pessoais e servidores. Também vimos que, pelo pequeno impacto da ordem de nJ, não parecem ser uma oportunidade real de melhoria de consumo energético. Porém, continua sendo boa prática de programação eliminá-los.
+
+Vimos que o escalonamento paralelo pode impactar no consumo energético. Como havíamos visto no experimento sobre perfis de consumo de potência, com muitos processos paralelos, começa a haver custos energéticos significativos pelas trocas de contexto. Este custo nem sempre é perceptível na mesma ordem de grandeza na performance, o que pode fazer com que o número ótimo de processos paralelos seja diferente para performance e energia.\\
+
+Este foi um trabalho de conclusão de graduação, com pouco tempo para seu desenvolvimento. Assim, o estudo teve caráter exploratório em que favorecemos a clareza de exposição em relação ao rigor estatístico. Futuramente, poderemos expandir este estudo com uma análise quantitativa sem muitas dificuldades. Finalmente, conseguimos atingir nossos objetivos propostos na introdução através de nossos experimentos.

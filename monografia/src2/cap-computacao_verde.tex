@@ -1,0 +1,79 @@
+%% ------------------------------------------------------------------------- %%
+\chapter{Computação Verde}
+\label{cap:computacaoverde}
+
+Sistemas computacionais impactam no meio ambiente desde sua fabricação até muito depois de seu descarte. A produção de componentes eletrônicos utiliza recursos naturais escassos. O uso de um sistema computacional consome energia e gera gases do efeito estufa. O descarte, como Sthiannopkao nota em \cite{sthiannopkao2013handling}, na maior parte do mundo é feito indevidamente, acumulando lixo e substâncias tóxicas.
+
+Ao estudo e desenvolvimento de técnicas para minimizar o impacto ambiental de sistemas computacionais, chamamos Computação Verde. É interdisciplinar pois une esforços políticos, acadêmicos e industriais. Os principais focos da pesquisa nessa área são:
+
+\begin{itemize}
+    \item reciclagem e descarte de hardware;
+    \item projeto e fabricação de componentes;
+    \item regulamentações e métricas;
+    \item uso eficiente de recursos computacionais.
+\end{itemize}
+
+Como as duas primeiras são exclusivas da engenharia, não trataremos delas neste texto. Nas seções seguintes, mostraremos as principais regulamentações, critérios considerados para as métricas, e guias para o uso eficiente de recursos.
+
+\section{Regulamentações}
+\mbox{}
+
+Regulamentações associadas à Computação Verde são um meio político de impor restrições sobre o impacto ambiental do uso e descarte de sistemas computacionais. Tem grande potencial, pois faz com que a competitividade de uma empresa dependa do investimento desta em computação verde.
+
+Na data de escrita deste trabalho, os Estados Unidos e a União Europeia têm as regulamentações mais fortes. Como Harmon e Auseklis notam em \cite{harmon2009sustainable}, as normas estadunidenses focam em eficiência energética, enquanto as europeias, na produção e no descarte de componentes. São elas:
+
+\begin{itemize}
+    \item \emph{Waste Electrical and Electronic Equipement Directive} (WEEED)
+
+    Lixo eletrônico é qualquer equipamento eletrônico cuja vida útil chegou ao fim \cite{puckett2002exporting}. Antes diretiva e lei na União Europeia a partir de 2003, a WEEED impõe a responsabilidade do lixo eletrônico sobre os produtores dos componentes.
+
+    \item \emph{Restriction of Hazardous Substances} (RoHS)
+
+    Junto à diretiva anterior, passou a ser lei na União Europeia a partir de 2003. Como o nome diz, restringe o uso de algumas substâncias nocivas ao meio ambiente na produção de componentes.
+
+    \item \emph{Electronic Product Environmental Assessment Tool} (EPEAT)
+
+    Avalia, através de uma série de critérios, computadores de mesa, \emph{notebooks} e monitores. Oferece uma ferramenta para que potenciais compradores possam comparar os equipamentos. Desde 2007, agências federais norte-americanas são obrigadas a comprar equipamentos que seguem esta norma.
+
+    \item \emph{Energy Star 4.0}
+
+    Revisão mais recente do padrão \emph{Energy Star} que regulamenta o desempenho energético de computadores de mesa, \emph{notebooks} e monitores nos vários estados de operação do \emph{hardware}.
+
+\end{itemize}
+
+\section{Métricas e \emph{benchmarks}}
+
+Métricas são cruciais em computação verde por dois motivos principais. Primeiro, porque fornecem uma ferramenta de avaliação e comparação de sistemas. Segundo, porque todo desenvolvimento ou aprimoramento de técnicas verdes sempre visa melhorar o desempenho sob alguma métrica. Wang e Khan \cite{wang2013review} apresentam uma revisão do trabalho em métricas para computação verde e consideram os seguintes critérios:
+
+\begin{itemize}
+    \item Emissão de gases do efeito estufa
+
+    %Estes gases têm impacto ambiental direto e por isso é interessante minimizar a emissão implicada pela operação de um \emph{data center}.
+
+    \item Umidade
+
+    %Alta umidade implica em falhas de \emph{hardware} e aumento do custo de refrigeração.
+
+    \item Temperatura
+
+    %Como a umidade, a temperatura impacta na vida útil do \emph{hardware}.
+
+    \item Potência e energia
+
+    \item Combinações dos critérios acima
+\end{itemize}
+
+Em geral, para comparar os desempenhos de sistemas diferentes sob uma determinada métrica, precisamos especificar uma certa operação ou carga de trabalho. A essa operação e carga de trabalho, chamamos \emph{benchmark}. Alguns dos \emph{benchmarks} mais comumente usados em computação verde são:
+\begin{itemize}
+    \item SPECpower
+    \item JouleSort
+    \item Linpack
+\end{itemize}
+
+\section{Uso eficiente de recursos computacionais}
+
+Historicamente, o desenvolvimento da computação foi focado em performance. Desde a teoria de complexidade de algoritmos até a construção de parques de servidores dedicados à demanda sempre crescente de usuários.
+
+Com os computadores crescendo em tamanho e em sendo cada vez mais utilizados, os gastos com a energia consumida por sistemas computacionais pode fazer com que a sua operação economicamente inviável para uma organização. Isto coloca uma forte barreira no aumento da performance e, por isso, começou a se estudar técnicas para utilizar estes sistemas consumindo menos energia.
+
+Nosso trabalho se enquadra nessa categoria pois queremos aumentar a eficiência energética de um sistema através de software. Por isso, julgamos importante que o leitor conheça as técnicas em eficiência energética, dedicando o próximo capítulo inteiramente a esta revisão técnica.
