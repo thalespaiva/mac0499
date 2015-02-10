@@ -1,0 +1,22 @@
+\select@language {brazilian}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Acesso por Telnet\relax }}{11}{figure.caption.8}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Consumo de pot\IeC {\^e}ncia obtido pela biblioteca para execu\IeC {\c c}\IeC {\~o}es paralelas de uma aplica\IeC {\c c}\IeC {\~a}o\relax }}{13}{figure.caption.9}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Exemplo de execu\IeC {\c c}\IeC {\~a}o do \emph {energyanalyser}\relax }}{14}{figure.caption.10}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Perfil do consumo de pot\IeC {\^e}ncia para uma tarefa \emph {CPU bound}\relax }}{16}{figure.caption.12}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Perfil do consumo de pot\IeC {\^e}ncia para uma tarefa \emph {Memory bound}\relax }}{17}{figure.caption.13}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Perfil do consumo de pot\IeC {\^e}ncia para uma tarefa \emph {IO bound}\relax }}{17}{figure.caption.14}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Pot\IeC {\^e}ncia consumida pelos algoritmos para diferentes tamanhos de entrada\relax }}{20}{figure.caption.15}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Tempo de execu\IeC {\c c}\IeC {\~a}o dos algoritmos para diferentes tamanhos de entrada\relax }}{20}{figure.caption.16}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Energia consumida pelos algoritmos para diferentes tamanhos de entrada\relax }}{21}{figure.caption.17}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Impacto m\IeC {\'e}dio da retirada de cada \emph {code smell} nas vari\IeC {\'a}veis de interesse\relax }}{24}{figure.caption.20}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Pot\IeC {\^e}ncia m\IeC {\'e}dia consumida pelo sistema para cada $ n $ \relax }}{26}{figure.caption.22}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Tempo m\IeC {\'e}dio de execu\IeC {\c c}\IeC {\~a}o da tarefa para cada $ n $ \relax }}{26}{figure.caption.23}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Energia m\IeC {\'e}dia consumida pela tarefa para cada $ n $ \relax }}{27}{figure.caption.24}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Energia m\IeC {\'e}dia consumida pelo sistema para cada $ n $ \relax }}{27}{figure.caption.25}
+\addvspace {10\p@ }
+\contentsfinish 

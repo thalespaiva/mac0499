@@ -1,0 +1,132 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{BHRM09}
+
+\bibitem[Alb10]{albers2010energy}
+Susanne Albers.
+\newblock Energy-efficient algorithms.
+\newblock {\em Communications of the ACM}, 53(5):86--96, 2010.
+
+\bibitem[Ams10]{VUBestPractices:Online}
+University Amsterdam.
+\newblock Best practices for energy efficient software, Setembro 2010.
+\newblock
+  \url{http://wiki.cs.vu.nl/green\_software/index.php/Best\_practices\_for\_energy\_efficient\_software}.
+
+\bibitem[Ard13]{ardito2013energy}
+Luca Ardito.
+\newblock Energy aware self-adaptation in mobile systems.
+\newblock Em {\em Proceedings of the 2013 International Conference on Software
+  Engineering}, p\'{a}ginas 1435--1437. IEEE Press, 2013.
+
+\bibitem[Ard14]{ardito2014energy}
+Luca Ardito.
+\newblock {\em Energy-aware Software}.
+\newblock Tese de Doutorado, Politecnico di Torino, 2014.
+
+\bibitem[BBL{\etalchar{+}}11]{beloglazov2011taxonomy}
+Anton Beloglazov, Rajkumar Buyya, Young~Choon Lee, Albert Zomaya et~al.
+\newblock A taxonomy and survey of energy-efficient data centers and cloud
+  computing systems.
+\newblock {\em Advances in Computers}, 82(2):47--111, 2011.
+
+\bibitem[BHMR09]{bunse2009exploring}
+Christian Bunse, Hagen Hopfner, Essam Mansour e Suman Roychoudhury.
+\newblock Exploring the energy consumption of data sorting algorithms in
+  embedded and mobile environments.
+\newblock Em {\em Mobile Data Management: Systems, Services and Middleware,
+  2009. MDM'09. Tenth International Conference on}, p\'{a}ginas 600--607. IEEE,
+  2009.
+
+\bibitem[BHRM09]{bunse2009choosing}
+Christian Bunse, Hagen H{\"o}pfner, Suman Roychoudhury e Essam Mansour.
+\newblock Choosing the" best" sorting algorithm for optimal energy consumption.
+\newblock Em {\em ICSOFT (2)}, p\'{a}ginas 199--206, 2009.
+
+\bibitem[Bro13]{DOCgovernors:Online}
+Dominik Brodowski.
+\newblock Cpu frequency and voltage scaling code in the linux tm kernel,
+  Novembro 2013.
+\newblock
+  \url{https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt}.
+
+\bibitem[Fow97]{fowler1997refactoring}
+Martin Fowler.
+\newblock Refactoring: Improving the design of existing code, 1997.
+
+\bibitem[HA09]{harmon2009sustainable}
+Robert~R Harmon e Nora Auseklis.
+\newblock Sustainable it services: Assessing the impact of green computing
+  practices.
+\newblock Em {\em Management of Engineering \& Technology, 2009. PICMET 2009.
+  Portland International Conference on}, p\'{a}ginas 1707--1717. IEEE, 2009.
+
+\bibitem[HP04]{hewlett2004microsoft}
+Intel Hewlett-Packard.
+\newblock Microsoft, phoenix, and toshiba. advanced configuration and power
+  interface specification, 2004.
+
+\bibitem[IC96]{APMnorm:Online}
+Microsoft~Corporation Intel~Corporation.
+\newblock Advanced power management apm bios interface specification, Fevereiro
+  1996.
+\newblock \url{http://intel-vintage-developer.eu5.org/IAL/POWERMGM/APMV12.PDF}.
+
+\bibitem[Int11]{ACPI_Overview:Online}
+Intel.
+\newblock Acpi overview, Fevereiro 2011.
+\newblock \url={http://www.acpi.info/presentations/ACPI\_Overview.pdf}.
+
+\bibitem[Kop04]{kopytov2004sysbench}
+Alexey Kopytov.
+\newblock Sysbench: a system performance benchmark.
+\newblock 2004.
+\newblock \url{http://sysbench.sourceforge.net}.
+
+\bibitem[Mur08]{murugesan2008harnessing}
+San Murugesan.
+\newblock Harnessing green it: Principles and practices.
+\newblock {\em IT professional}, 10(1):24--33, 2008.
+
+\bibitem[PRZ{\etalchar{+}}02]{puckett2002exporting}
+Jim Puckett, Mary Ryan, Bill Zude, Staci Simpson, Tony Hedenrick e Basel~Action
+  Network.
+\newblock {\em Exporting harm: the high-tech trashing of Asia}.
+\newblock Basel Action Network, 2002.
+
+\bibitem[SA11]{steigerwald2011developing}
+B~Steigerwald e Abhishek Agrawal.
+\newblock Developing green software.
+\newblock {\em Intel White Paper}, 2011.
+
+\bibitem[SW13]{sthiannopkao2013handling}
+Suthipong Sthiannopkao e Ming~Hung Wong.
+\newblock Handling e-waste in developed and developing countries: Initiatives,
+  practices, and consequences.
+\newblock {\em Science of the Total Environment}, 463:1147--1153, 2013.
+
+\bibitem[Tan11]{tange2011gnu}
+Ole Tange.
+\newblock Gnu parallel—the command-line power tool.
+\newblock {\em The USENIX Magazine}, 36(1):42--47, 2011.
+
+\bibitem[VAPM13]{vetro2013definition}
+Antonio Vetro, Luca Ardito, Giuseppe Procaccianti e Maurizio Morisio.
+\newblock Definition, implementation and validation of energy code smells: an
+  exploratory study on an embedded system.
+\newblock Em {\em ENERGY 2013, The Third International Conference on Smart
+  Grids, Green Communications and IT Energy-aware Technologies}, p\'{a}ginas
+  34--39, 2013.
+
+\bibitem[Wat02]{watanabe2002acpi}
+Takanori Watanabe.
+\newblock Acpi implementation on freebsd.
+\newblock Em {\em USENIX Annual Technical Conference, FREENIX Track},
+  p\'{a}ginas 121--131, 2002.
+
+\bibitem[WK13]{wang2013review}
+Lizhe Wang e Samee~U Khan.
+\newblock Review of performance metrics for green data centers: a taxonomy
+  study.
+\newblock {\em The journal of supercomputing}, 63(3):639--656, 2013.
+
+\end{thebibliography}

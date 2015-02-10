@@ -1,0 +1,16 @@
+\select@language {brazilian}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Estados dos dispositivos sob a norma APM v1.2\relax }}{6}{table.caption.5}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Especifica\IeC {\c c}\IeC {\~a}o dos estados do sistema pela APM v1.2\relax }}{6}{table.caption.6}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Gerenciadores de uso do processador no Linux\relax }}{8}{table.caption.7}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Linha de comando para cada tipo de tarefa\relax }}{16}{table.caption.11}
+\contentsline {table}{\numberline {5.2}{\ignorespaces \emph {Code smells} considerados\relax }}{22}{table.caption.18}
+\contentsline {table}{\numberline {5.3}{\ignorespaces M\IeC {\'e}dias amostrais das vari\IeC {\'a}veis estudadas\relax }}{24}{table.caption.19}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Tabela de impacto da elimina\IeC {\c c}\IeC {\~a}o de cada \emph {code smell}\relax }}{25}{table.caption.21}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Tabela de melhora pela utiliza\IeC {\c c}\IeC {\~a}o de $ n = 7 $ para cada $ n $\relax }}{28}{table.caption.26}
+\addvspace {10\p@ }
+\contentsfinish 
